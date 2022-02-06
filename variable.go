@@ -2,13 +2,8 @@ package main
 
 import "fmt"
 
-const Pi = 3.14
-
-const (
-	Username = "test_user"
-	Password = "test_pass"
-)
-
 func main() {
-	fmt.Println(Pi, Username, Password)
+	var u8 uint8 = 255
+
+	fmt.Printf("%T %v", u8, u8)
 }
