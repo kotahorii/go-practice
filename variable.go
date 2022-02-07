@@ -3,14 +3,13 @@ package main
 import "fmt"
 
 func main() {
-	n := []int{1, 2, 3, 4, 5, 6}
-	n = append(n, 100)
-	fmt.Println(n)
-
-	var board = [][]int{
-		{0, 1, 2},
-		{3, 4, 5},
-		{6, 7, 8},
-	}
-	fmt.Println(board)
+	m := map[string]int{"apple": 100, "banana": 200}
+	fmt.Println(m)
+	fmt.Println(m["apple"])
+	m["banana"] = 300
+	fmt.Println(m)
+	m["new"] = 500
+	fmt.Println(m)
+	v, ok := m["apple"]
+	fmt.Println(v, ok)
 }
