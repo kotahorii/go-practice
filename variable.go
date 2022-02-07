@@ -2,10 +2,21 @@ package main
 
 import "fmt"
 
-func main() {
-	n := 100
-	fmt.Println(&n)
+type Vertex struct {
+	X, Y int
+	S    string
+}
 
-	p := &n
-	fmt.Println(*p)
+func changeVertex(v Vertex) {
+	v.X = 100
+}
+
+func changeVertex2(v *Vertex) {
+	v.X = 1000
+}
+
+func main() {
+	v := &Vertex{1, 2, "test"}
+	changeVertex2(v)
+	fmt.Println(*v)
 }
