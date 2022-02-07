@@ -2,22 +2,13 @@ package main
 
 import "fmt"
 
-func add(x, y int) (int, int) {
-	return x + y, x - y
-}
-
-func cal(price, item int) (result int) {
-	result = price * item
-	return
+func circleArea(pi float64) func(radius float64) float64 {
+	return func(radius float64) float64 {
+		return pi * radius * radius
+	}
 }
 
 func main() {
-	r1, r2 := add(1, 2)
-	fmt.Println(r1, r2)
-
-	fmt.Println(cal(100, 2))
-
-	func(x int) {
-		fmt.Println("inner func", x)
-	}(1)
+	c1 := circleArea(3.14)
+	fmt.Println(c1(3))
 }
