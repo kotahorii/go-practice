@@ -2,13 +2,13 @@ package main
 
 import "fmt"
 
-func circleArea(pi float64) func(radius float64) float64 {
-	return func(radius float64) float64 {
-		return pi * radius * radius
-	}
+func foo(params ...int) {
+	fmt.Println(len(params), params)
 }
 
 func main() {
-	c1 := circleArea(3.14)
-	fmt.Println(c1(3))
+	s := []int{1, 2, 3}
+	fmt.Println(s)
+
+	foo(s...)
 }
