@@ -1,12 +1,16 @@
 package main
 
-import (
-	"fmt"
-	"strconv"
-)
+import "fmt"
 
 func main() {
-	var s string = "14"
-	i, _ := strconv.Atoi(s)
-	fmt.Printf("%T %v", i, i)
+	n := []int{1, 2, 3, 4, 5, 6}
+	n = append(n, 100)
+	fmt.Println(n)
+
+	var board = [][]int{
+		{0, 1, 2},
+		{3, 4, 5},
+		{6, 7, 8},
+	}
+	fmt.Println(board)
 }
