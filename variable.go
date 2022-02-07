@@ -2,14 +2,22 @@ package main
 
 import "fmt"
 
+func add(x, y int) (int, int) {
+	return x + y, x - y
+}
+
+func cal(price, item int) (result int) {
+	result = price * item
+	return
+}
+
 func main() {
-	m := map[string]int{"apple": 100, "banana": 200}
-	fmt.Println(m)
-	fmt.Println(m["apple"])
-	m["banana"] = 300
-	fmt.Println(m)
-	m["new"] = 500
-	fmt.Println(m)
-	v, ok := m["apple"]
-	fmt.Println(v, ok)
+	r1, r2 := add(1, 2)
+	fmt.Println(r1, r2)
+
+	fmt.Println(cal(100, 2))
+
+	func(x int) {
+		fmt.Println("inner func", x)
+	}(1)
 }
