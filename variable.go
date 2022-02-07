@@ -1,9 +1,15 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 func main() {
-	var u8 uint8 = 255
+	fmt.Println("hello", "world")
+	fmt.Println(string("Hello world"[0]))
+	var s string = "Hello world"
 
-	fmt.Printf("%T %v", u8, u8)
+	fmt.Println(strings.Replace(s, "H", "X", 1))
+	fmt.Println(strings.Contains(s, "world"))
 }
