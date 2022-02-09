@@ -1,19 +1,21 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
-type Person struct {
-	Name string
-	Age  int
+type Vertex struct {
+	X, Y int
 }
 
-func (p Person) String() string {
-	return fmt.Sprintf("My name is %v.", p.Name)
+// func (v *Vertex) plus() int {
+// 	return v.X + v.Y
+// }
+
+func (v Vertex) String() string {
+	return fmt.Sprintf("X is %v! Y is %v!", v.X, v.Y)
 }
 
 func main() {
-	mike := Person{"Mike", 22}
-	fmt.Println(mike)
+	v := Vertex{3, 4}
+	// fmt.Println(v.plus())
+	fmt.Println(v)
 }
