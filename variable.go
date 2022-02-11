@@ -1,38 +1,24 @@
 package main
 
-import "fmt"
-
-func producer(first chan int) {
-	defer close(first)
-	for i := 0; i < 10; i++ {
-		first <- i
-	}
-}
-
-func multi2(first <-chan int, second chan<- int) {
-	defer close(second)
-	for i := range first {
-		second <- i * 2
-	}
-}
-
-func multi4(second chan int, third chan int) {
-	defer close(third)
-	for i := range second {
-		third <- i * 2
-	}
-}
+import (
+	"fmt"
+	"time"
+)
 
 func main() {
-	first := make(chan int)
-	second := make(chan int)
-	third := make(chan int)
-
-	go producer(first)
-	go multi2(first, second)
-	go multi4(second, third)
-
-	for result := range third {
-		fmt.Println(result)
+	tick := time.Tick(100 * time.Millisecond)
+	boom := time.After(500 * time.Millisecond)
+OuterLoop:
+	for {
+		select {
+		case <-tick:
+			fmt.Println("tick.")
+		case <-boom:
+			fmt.Println("BOOM!")
+			break OuterLoop
+		default:
+			fmt.Println("   .")
+			time.Sleep(50 * time.Millisecond)
+		}
 	}
 }
