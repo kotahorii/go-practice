@@ -1,24 +1,21 @@
 package main
 
-import (
-	"fmt"
-	"time"
-)
+import "fmt"
+
+func goroutine(s []string, c chan string) {
+	sum := ""
+	for _, v := range s {
+		sum += v
+		c <- sum
+	}
+	close(c)
+}
 
 func main() {
-	tick := time.Tick(100 * time.Millisecond)
-	boom := time.After(500 * time.Millisecond)
-OuterLoop:
-	for {
-		select {
-		case <-tick:
-			fmt.Println("tick.")
-		case <-boom:
-			fmt.Println("BOOM!")
-			break OuterLoop
-		default:
-			fmt.Println("   .")
-			time.Sleep(50 * time.Millisecond)
-		}
+	words := []string{"test1!", "test2!", "test3!", "test4!"}
+	c := make(chan string)
+	go goroutine(words, c)
+	for w := range c {
+		fmt.Println(w)
 	}
 }
