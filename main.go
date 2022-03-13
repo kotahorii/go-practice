@@ -1,7 +1,11 @@
+/*
+Copyright © 2022 NAME HERE <EMAIL ADDRESS>
+
+*/
 package main
 
-import "fmt"
+import "sample2/cmd"
 
 func main() {
-	fmt.Println("aaaaaa")
+	cmd.Execute()
 }
