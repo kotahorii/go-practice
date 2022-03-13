@@ -1,29 +1,29 @@
 package main
 
-import (
-	"fmt"
-	"log"
-)
+import "fmt"
 
-type MyError struct {
-	Message string
+type Stringify interface {
+	ToString() string
 }
 
-func (e *MyError) Error() string {
-	return e.Message
+type Person struct {
+	Name string
+	Age  int
 }
 
-func NumIsGreaterThanZero(num int) (int, error) {
-	if num >= 0 {
-		return num, nil
-	}
-	return 0, &MyError{Message: "エラーが発生しました"}
+type T struct {
+	Id   int
+	Name string
+}
+
+func (t *T) String() string {
+	return fmt.Sprintf("<<%d, %s>>", t.Id, t.Name)
+}
+
+func PrintStr(s fmt.Stringer) {
+	fmt.Println(s.String())
 }
 
 func main() {
-	num, err := NumIsGreaterThanZero(-10)
-	if err != nil {
-		log.Fatal(err.Error())
-	}
-	fmt.Println(num)
+	PrintStr(&T{Id: 3, Name: "Takashi"})
 }
