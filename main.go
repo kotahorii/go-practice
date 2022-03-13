@@ -2,30 +2,28 @@ package main
 
 import (
 	"fmt"
-	"time"
+	"log"
 )
 
-func main() {
-	ch := make(chan int, 20)
-	go receive("1st goroutine", ch)
-	go receive("2nd goroutine", ch)
-	go receive("3rd goroutine", ch)
-
-	for i := 0; i < 100; i++ {
-		ch <- i
-	}
-	close(ch)
-
-	time.Sleep(3 * time.Second)
+type MyError struct {
+	Message string
 }
 
-func receive(name string, ch <-chan int) {
-	for {
-		i, ok := <-ch
-		if !ok {
-			break
-		}
-		fmt.Println(name, i)
+func (e *MyError) Error() string {
+	return e.Message
+}
+
+func NumIsGreaterThanZero(num int) (int, error) {
+	if num >= 0 {
+		return num, nil
 	}
-	fmt.Println(name + " is done.")
+	return 0, &MyError{Message: "エラーが発生しました"}
+}
+
+func main() {
+	num, err := NumIsGreaterThanZero(-10)
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+	fmt.Println(num)
 }
