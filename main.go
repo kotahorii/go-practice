@@ -1,32 +1,31 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
-	"log"
 	"time"
 )
 
-type User struct {
-	Id      int
-	Name    string
-	Email   string
-	Created time.Time
+func main() {
+	ch := make(chan int, 20)
+	go receive("1st goroutine", ch)
+	go receive("2nd goroutine", ch)
+	go receive("3rd goroutine", ch)
+
+	for i := 0; i < 100; i++ {
+		ch <- i
+	}
+	close(ch)
+
+	time.Sleep(3 * time.Second)
 }
 
-func main() {
-	src := `
-		{
-			"Id":1,
-			"Name":"Takashi",
-			"Email":"example.com",
-			"Created":"2022-03-13T15:26:11.178205+09:00"
+func receive(name string, ch <-chan int) {
+	for {
+		i, ok := <-ch
+		if !ok {
+			break
 		}
-		`
-	u := new(User)
-	err := json.Unmarshal([]byte(src), u)
-	if err != nil {
-		log.Fatal(err)
+		fmt.Println(name, i)
 	}
-	fmt.Printf("%+v\n", u)
+	fmt.Println(name + " is done.")
 }
