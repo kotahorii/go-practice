@@ -1,16 +1,17 @@
 package main
 
-import (
-	"fmt"
-	"log"
-	"os"
-)
+import "fmt"
+
+type User struct {
+	Id    int
+	Email string
+}
+
+func (u *User) String() string {
+	return fmt.Sprintf("<%d, %s>", u.Id, u.Email)
+}
 
 func main() {
-	err := os.Symlink("foo.txt", "bar.txt")
-	if err != nil {
-		log.Fatal(err)
-	}
-	path, _ := os.Readlink("bar.txt")
-	fmt.Println(path)
+	u := &User{Id: 123, Email: "mail@example.com"}
+	fmt.Printf("%s\n", u)
 }
