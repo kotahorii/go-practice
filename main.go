@@ -2,12 +2,15 @@ package main
 
 import (
 	"fmt"
-	"helloworld/mylib/under"
+	"log"
+	"os"
 )
 
 func main() {
-	under.Hello()
-	person := under.Person{Name: "Mike", Age: 20}
-	fmt.Println(person)
-	fmt.Println(under.Public)
+	err := os.Symlink("foo.txt", "bar.txt")
+	if err != nil {
+		log.Fatal(err)
+	}
+	path, _ := os.Readlink("bar.txt")
+	fmt.Println(path)
 }
